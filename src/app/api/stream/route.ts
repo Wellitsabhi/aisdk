@@ -9,6 +9,14 @@ export async function POST(req: Request) {
       prompt,
     });
 
+    result.usage.then((usage)=>{
+        console.log({
+          inputTokens: usage.inputTokens,
+          outputTokens: usage.outputTokens,
+          totalTokens: usage.totalTokens,
+        });
+    })
+
     return result.toUIMessageStreamResponse();
   } catch (error) {
     console.error("Error in /api/stream:", error);
