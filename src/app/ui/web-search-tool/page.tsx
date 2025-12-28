@@ -43,6 +43,37 @@ export default function WebSearchToolPage() {
                       className="whitespace-pre-wrap"
                     >
                       {part.text}
+
+                      {message.role === "assistant" && sources.length > 0 && (
+                        <div className="mb-2">
+                          <div className="bg-blue-50 dark:bg-blue-950/20 border border-blue-200 dark:border-blue-800 rounded-lg p-3">
+                            <div className="flex items-center gap-2 mb-2">
+                              <span className="text-blue-600 dark:text-blue-400 text-sm font-medium">
+                                Sources ({sources.length})
+                              </span>
+                            </div>
+
+                            <div className="space-y-2">
+                              {sources.map((part, i) => {
+                                if (part.type === "source-url") {
+                                  return (
+                                    <a
+                                      key={`${message.id}-${i}`}
+                                      href={part.url}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="block text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 text-sm underline truncate"
+                                      title={part.url}
+                                    >
+                                      {part.title || part.url}
+                                    </a>
+                                  );
+                                }
+                              })}
+                            </div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   );
                 // case "tool-web_search_preview":

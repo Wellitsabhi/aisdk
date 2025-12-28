@@ -39,7 +39,7 @@ export async function POST(req: Request) {
       stopWhen: stepCountIs(2),
     });
 
-    return result.toUIMessageStreamResponse();
+    return result.toUIMessageStreamResponse({sendSources: true});
   } catch (error) {
     console.error("Error in /api/chat:", error);
     return new Response("Failed to stream chat messages", { status: 500 });
